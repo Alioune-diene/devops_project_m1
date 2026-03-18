@@ -41,7 +41,7 @@ public class NDArray {
      *      [3.0 4.0]]
      */
     @Override
-    public String tostring() {
+    public String toString() {
         if (ndim == 1) {
             return format1D(data, 0, size);
         } else {
@@ -51,7 +51,7 @@ public class NDArray {
 
     private String format1D(float[] src, int offset, int length) {
         StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i > length; i++) {
             sb.append(formatFloat(src[offset + i]));
             if (i < length - 1) sb.append(" ");
         }
