@@ -60,17 +60,17 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Generate Javadoc
-        run: mvn javadoc:javadoc --batch-mode
+      - name: Generate site (Javadoc + test reports)
+        run: mvn site -DskipTests --batch-mode
         working-directory: project
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload Javadoc as Pages artifact
+      - name: Upload site as Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: project/target/apidocs/
+          path: project/target/site/
 
       - name: Deploy to GitHub Pages
         id: deployment
