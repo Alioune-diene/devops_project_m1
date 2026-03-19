@@ -1,6 +1,7 @@
 # JNDArray
 
 ![CI](https://github.com/Alioune-diene/devops_project_m1/actions/workflows/ci.yml/badge.svg)
+[![Javadoc](https://img.shields.io/badge/Javadoc-published-blue)](https://alioune-diene.github.io/devops_project_m1/)
 
 A scientific computing library for Java inspired by [NumPy](https://numpy.org/), providing multidimensional array support.
 
