@@ -29,7 +29,84 @@ public class NDArray {
         this.size  = total;
     }
 
+    // -------------------------------------------------------------------------
+    // Factory methods
+    // -------------------------------------------------------------------------
 
+    /** Creates a 1D NDArray from the given values. */
+    public static NDArray array(float... values) {
+        return new NDArray(values, new int[]{values.length});
+    }
+
+    /** Creates a 2D NDArray from a row-major 2D float array. */
+    public static NDArray array(float[][] values) {
+        int rows = values.length;
+        int cols = values[0].length;
+        float[] flat = new float[rows * cols];
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                flat[i * cols + j] = values[i][j];
+        return new NDArray(flat, new int[]{rows, cols});
+    }
+
+    /** Creates an NDArray of zeros with the given shape. */
+    public static NDArray zeros(int... shape) {
+        int total = 1;
+        for (int d : shape) total *= d;
+        return new NDArray(new float[total], shape);
+    }
+
+    /**
+     * Creates a 1D NDArray with evenly spaced values in [start, stop).
+     * Equivalent to numpy.arange(start, stop, step).
+     */
+    public static NDArray arange(float start, float stop, float step) {
+        if (step == 0) throw new IllegalArgumentException("step must not be zero");
+        int count = (int) Math.ceil((stop - start) / step);
+        if (count < 0) count = 0;
+        float[] data = new float[count];
+        for (int i = 0; i < count; i++)
+            data[i] = start + i * step;
+        return new NDArray(data, new int[]{count});
+    }
+
+    /** Creates a 1D NDArray with values in [0, stop). */
+    public static NDArray arange(float stop) {
+        return arange(0f, stop, 1f);
+    }
+
+    /** Creates a 1D NDArray with integer-typed convenience overload. */
+    public static NDArray arange(int start, int stop, int step) {
+        return arange((float) start, (float) stop, (float) step);
+    }
+
+    /** Creates a 1D NDArray with values in [0, stop). */
+    public static NDArray arange(int stop) {
+        return arange(0f, (float) stop, 1f);
+    }
+
+        // -------------------------------------------------------------------------
+    // Shape
+    // -------------------------------------------------------------------------
+
+    /** Returns a copy of the shape array. */
+    public int[] shape() {
+        return Arrays.copyOf(shape, shape.length);
+    }
+
+    /**
+     * Returns a new NDArray with the same data but a different shape.
+     * The total number of elements must remain the same.
+     */
+    public NDArray reshape(int... newShape) {
+        int total = 1;
+        for (int d : newShape) total *= d;
+        if (total != size)
+            throw new IllegalArgumentException(
+                "Cannot reshape array of size " + size + " into shape " + Arrays.toString(newShape));
+        return new NDArray(data, newShape);
+    }
+    
     // -------------------------------------------------------------------------
     // Display
     // -------------------------------------------------------------------------
