@@ -138,6 +138,14 @@
     </plugins>
   </build>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/Alioune-diene/devops_project_m1</url>
+    </repository>
+  </distributionManagement>
+
   <reporting>
     <plugins>
       <!-- Javadoc for main sources -->
