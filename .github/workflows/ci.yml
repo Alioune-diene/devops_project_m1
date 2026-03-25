@@ -75,3 +75,33 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy:
+    name: Publish to GitHub Packages
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 with GitHub Packages
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+      - name: Publish SNAPSHOT to GitHub Packages
+        run: mvn deploy -DskipTests --batch-mode
+        working-directory: project
+        env:
+          GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}

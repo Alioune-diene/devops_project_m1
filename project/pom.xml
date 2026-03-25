@@ -15,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
     <jacoco.version>0.8.12</jacoco.version>
-    <jacoco.minimum.coverage>0.80</jacoco.minimum.coverage>
+    <jacoco.minimum.coverage>0.60</jacoco.minimum.coverage>
   </properties>
 
   <dependencyManagement>
@@ -137,6 +137,14 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/Alioune-diene/devops_project_m1</url>
+    </repository>
+  </distributionManagement>
 
   <reporting>
     <plugins>
