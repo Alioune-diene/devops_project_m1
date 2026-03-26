@@ -1,8 +1,16 @@
 # JNDArray
+<p align="center">
+  <a href="https://github.com/Alioune-diene/devops_project_m1/actions/workflows/ci.yml/badge.svg">
+    <img src="https://github.com/Alioune-diene/devops_project_m1/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  </a>
+  <a href="https://alioune-diene.github.io/devops_project_m1/">
+    <img src="https://img.shields.io/badge/Javadoc-published-blue" alt="Javadoc" />
+  </a>
+  <a href="https://codecov.io/gh/Alioune-diene/devops_project_m1">
+    <img src="https://codecov.io/gh/Alioune-diene/devops_project_m1/branch/main/graph/badge.svg" alt="codecov" />
+  </a>
+</p>   
 
-![CI](https://github.com/Alioune-diene/devops_project_m1/actions/workflows/ci.yml/badge.svg)
-[![Javadoc](https://img.shields.io/badge/Javadoc-published-blue)](https://alioune-diene.github.io/devops_project_m1/)
-[![codecov](https://codecov.io/gh/Alioune-diene/devops_project_m1/branch/main/graph/badge.svg)](https://codecov.io/gh/Alioune-diene/devops_project_m1)
 
 A scientific computing library for Java inspired by [NumPy](https://numpy.org/), providing multidimensional array support.
 
