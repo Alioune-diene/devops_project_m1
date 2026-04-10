@@ -36,7 +36,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.5.0.6356:sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=JNDArray -Dsonar.projectName=JNDArray
+        run: |
+          mvn -B verify \
+            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=JNDArray \
+            -Dsonar.projectName=JNDArray \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+            -Dsonar.qualitygate.wait=true
 
       - name: Upload Jacoco coverage report
         if: always()
