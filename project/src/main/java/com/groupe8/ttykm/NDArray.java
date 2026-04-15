@@ -107,6 +107,33 @@ public class NDArray {
         return new NDArray(data, newShape);
     }
 
+
+    // -------------------------------------------------------------------------
+    // Element access
+    // -------------------------------------------------------------------------
+
+    /** Gets an element from a 1D array. */
+    public float get(int i) {
+        return data[i];
+    }
+
+    /** Gets an element from a 2D array. */
+    public float get(int row, int col) {
+        if (ndim != 2) throw new IllegalStateException("Array is not 2D");
+        return data[row * shape[1] + col];
+    }
+
+    /** Sets an element in a 1D array. */
+    public void set(int i, float value) {
+        data[i] = value;
+    }
+
+    /** Sets an element in a 2D array. */
+    public void set(int row, int col, float value) {
+        if (ndim != 2) throw new IllegalStateException("Array is not 2D");
+        data[row * shape[1] + col] = value;
+    }
+
     // -------------------------------------------------------------------------
     // Display
     // -------------------------------------------------------------------------
