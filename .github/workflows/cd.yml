@@ -29,6 +29,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Run tests
+        run: mvn verify --batch-mode
+        working-directory: project
+
       - name: Generate site (Javadoc + test reports)
         run: mvn site -DskipTests --batch-mode
         working-directory: project
