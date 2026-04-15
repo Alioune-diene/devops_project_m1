@@ -134,6 +134,22 @@ public class NDArray {
         data[row * shape[1] + col] = value;
     }
 
+
+    // -------------------------------------------------------------------------
+    // Basic operations
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns a new NDArray equal to this + other (element-wise).
+     */
+    public NDArray add(NDArray other) {
+        checkSameShape(other);
+        float[] result = new float[size];
+        for (int i = 0; i < size; i++)
+            result[i] = data[i] + other.data[i];
+        return new NDArray(result, shape);
+    }
+
     // -------------------------------------------------------------------------
     // Display
     // -------------------------------------------------------------------------
