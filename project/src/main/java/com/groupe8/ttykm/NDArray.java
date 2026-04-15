@@ -134,6 +134,53 @@ public class NDArray {
         data[row * shape[1] + col] = value;
     }
 
+
+    // -------------------------------------------------------------------------
+    // Basic operations
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns a new NDArray equal to this + other (element-wise).
+     * Both arrays must have the same shape. 
+    */
+
+    public NDArray add(NDArray other) {
+        checkSameShape(other);
+        float[] result = new float[size];
+        for (int i = 0; i < size; i++)
+            result[i] = data[i] + other.data[i];
+        return new NDArray(result, shape);
+    }
+
+
+    /**
+     * Returns a new NDArray equal to this + scalar (element-wise).
+     */
+    public NDArray add(float scalar) {
+        float[] result = new float[size];
+        for (int i = 0; i < size; i++)
+            result[i] = data[i] + scalar;
+        return new NDArray(result, shape);
+    }
+
+    /**
+     * Adds other to this array in-place (+=).
+     * Both arrays must have the same shape.
+     */
+    public void addInPlace(NDArray other) {
+        checkSameShape(other);
+        for (int i = 0; i < size; i++)
+            data[i] += other.data[i];
+    }
+
+    /**
+     * Adds a scalar to this array in-place (+=).
+     */
+    public void addInPlace(float scalar) {
+        for (int i = 0; i < size; i++)
+            data[i] += scalar;
+    }
+
     // -------------------------------------------------------------------------
     // Display
     // -------------------------------------------------------------------------
