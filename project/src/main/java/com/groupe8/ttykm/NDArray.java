@@ -141,12 +141,25 @@ public class NDArray {
 
     /**
      * Returns a new NDArray equal to this + other (element-wise).
-     */
+     * Both arrays must have the same shape. 
+    */
+
     public NDArray add(NDArray other) {
         checkSameShape(other);
         float[] result = new float[size];
         for (int i = 0; i < size; i++)
             result[i] = data[i] + other.data[i];
+        return new NDArray(result, shape);
+    }
+
+
+    /**
+     * Returns a new NDArray equal to this + scalar (element-wise).
+     */
+    public NDArray add(float scalar) {
+        float[] result = new float[size];
+        for (int i = 0; i < size; i++)
+            result[i] = data[i] + scalar;
         return new NDArray(result, shape);
     }
 
