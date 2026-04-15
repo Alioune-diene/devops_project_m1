@@ -163,6 +163,24 @@ public class NDArray {
         return new NDArray(result, shape);
     }
 
+    /**
+     * Adds other to this array in-place (+=).
+     * Both arrays must have the same shape.
+     */
+    public void addInPlace(NDArray other) {
+        checkSameShape(other);
+        for (int i = 0; i < size; i++)
+            data[i] += other.data[i];
+    }
+
+    /**
+     * Adds a scalar to this array in-place (+=).
+     */
+    public void addInPlace(float scalar) {
+        for (int i = 0; i < size; i++)
+            data[i] += scalar;
+    }
+
     // -------------------------------------------------------------------------
     // Display
     // -------------------------------------------------------------------------
