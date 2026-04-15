@@ -107,6 +107,80 @@ public class NDArray {
         return new NDArray(data, newShape);
     }
 
+
+    // -------------------------------------------------------------------------
+    // Element access
+    // -------------------------------------------------------------------------
+
+    /** Gets an element from a 1D array. */
+    public float get(int i) {
+        return data[i];
+    }
+
+    /** Gets an element from a 2D array. */
+    public float get(int row, int col) {
+        if (ndim != 2) throw new IllegalStateException("Array is not 2D");
+        return data[row * shape[1] + col];
+    }
+
+    /** Sets an element in a 1D array. */
+    public void set(int i, float value) {
+        data[i] = value;
+    }
+
+    /** Sets an element in a 2D array. */
+    public void set(int row, int col, float value) {
+        if (ndim != 2) throw new IllegalStateException("Array is not 2D");
+        data[row * shape[1] + col] = value;
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Basic operations
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns a new NDArray equal to this + other (element-wise).
+     * Both arrays must have the same shape. 
+    */
+
+    public NDArray add(NDArray other) {
+        checkSameShape(other);
+        float[] result = new float[size];
+        for (int i = 0; i < size; i++)
+            result[i] = data[i] + other.data[i];
+        return new NDArray(result, shape);
+    }
+
+
+    /**
+     * Returns a new NDArray equal to this + scalar (element-wise).
+     */
+    public NDArray add(float scalar) {
+        float[] result = new float[size];
+        for (int i = 0; i < size; i++)
+            result[i] = data[i] + scalar;
+        return new NDArray(result, shape);
+    }
+
+    /**
+     * Adds other to this array in-place (+=).
+     * Both arrays must have the same shape.
+     */
+    public void addInPlace(NDArray other) {
+        checkSameShape(other);
+        for (int i = 0; i < size; i++)
+            data[i] += other.data[i];
+    }
+
+    /**
+     * Adds a scalar to this array in-place (+=).
+     */
+    public void addInPlace(float scalar) {
+        for (int i = 0; i < size; i++)
+            data[i] += scalar;
+    }
+
     // -------------------------------------------------------------------------
     // Display
     // -------------------------------------------------------------------------
