@@ -9,6 +9,20 @@
   <a href="https://codecov.io/gh/Alioune-diene/devops_project_m1">
     <img src="https://codecov.io/gh/Alioune-diene/devops_project_m1/branch/main/graph/badge.svg" alt="codecov" />
   </a>
+  <a href="https://im2ag-sonar.univ-grenoble-alpes.fr/dashboard?id=JNDArray">
+    <img src="https://im2ag-sonar.univ-grenoble-alpes.fr/api/project_badges/measure?project=JNDArray&metric=alert_status&token=sqb_6351d5a808563293ecfec9365475e66c9abc1ebc" alt="Quality Gate" />
+  </a>
+  
+  <a href="https://im2ag-sonar.univ-grenoble-alpes.fr/dashboard?id=JNDArray">
+    <img src="https://im2ag-sonar.univ-grenoble-alpes.fr/api/project_badges/measure?project=JNDArray&metric=software_quality_reliability_rating&token=sqb_6351d5a808563293ecfec9365475e66c9abc1ebc" alt="Reliability rating" />
+  </a>
+ <a href="https://im2ag-sonar.univ-grenoble-alpes.fr/dashboard?id=JNDArray">
+    <img src="https://im2ag-sonar.univ-grenoble-alpes.fr/api/project_badges/measure?project=JNDArray&metric=software_quality_security_rating&token=sqb_6351d5a808563293ecfec9365475e66c9abc1ebc" alt="Security rating" />
+  </a>
+<a href="https://im2ag-sonar.univ-grenoble-alpes.fr/dashboard?id=JNDArray">
+    <img src="https://im2ag-sonar.univ-grenoble-alpes.fr/api/project_badges/measure?project=JNDArray&metric=software_quality_maintainability_rating&token=sqb_6351d5a808563293ecfec9365475e66c9abc1ebc" alt="Maintainability rating" />
+  </a>
+  
 </p>   
 
 
