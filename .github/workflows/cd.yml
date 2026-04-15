@@ -30,7 +30,7 @@ jobs:
           cache: maven
 
       - name: Run tests and generate site (Javadoc + test reports)
-        run: mvn -B verify site -DskipTests
+        run: mvn -B verify site
         working-directory: project
 
       - name: Configure GitHub Pages
