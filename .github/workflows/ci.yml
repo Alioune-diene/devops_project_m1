@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -22,9 +24,25 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and run tests with coverage
-        run: mvn verify --batch-mode
+      - name: Cache SonarQube packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Build, test & run SonarQube analysis
         working-directory: project
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          mvn -B verify \
+            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=JNDArray \
+            -Dsonar.projectName=JNDArray \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+            -Dsonar.qualitygate.wait=true
 
       - name: Upload Jacoco coverage report
         if: always()
@@ -34,44 +52,9 @@ jobs:
           path: project/target/site/jacoco/
           retention-days: 7
 
-  pages:
-    name: Publish Javadoc
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-
-      - name: Generate site (Javadoc + test reports)
-        run: mvn site -DskipTests --batch-mode
-        working-directory: project
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload site as Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: project/target/site/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: project/target/site/jacoco/jacoco.xml
+          fail_ci_if_error: true
