@@ -106,8 +106,10 @@ Configure the GitHub Packages repository:
 | Jacoco | Code coverage | Native Maven integration, enforces minimum coverage threshold |
 | GitHub Actions | CI/CD pipeline | Native GitHub integration, no external service required |
 | Codecov | Coverage reporting | Posts coverage diffs on PRs, tracks trends over time |
+| SonarQube | Static analysis | Detects bugs, code smells, and security vulnerabilities |
 | GitHub Packages | Artifact registry | Integrated with the repo, no external registry needed |
 | GitHub Pages | Documentation hosting | Auto-publishes Maven site (Javadoc + test reports) on every merge |
+| Docker | Containerisation | Reproducible demo environment, published to GHCR |
 
 ## Git Workflow
 
@@ -128,13 +130,20 @@ Branch naming examples:
 ### PR validation checklist
 
 - All tests pass (`mvn verify`)
-- Coverage ≥ 60% (enforced by Jacoco)
+- Coverage ≥ 90% (enforced by Jacoco)
 - Code reviewed and approved by a team member
 - No direct push to `main`
 
 ## Docker Images
 
-> _To be filled in if Docker images are produced._
+A demo image is automatically built and pushed to the GitHub Container Registry on every merge to `main`.
+
+```bash
+docker pull ghcr.io/alioune-diene/jndarray:latest
+docker run --rm ghcr.io/alioune-diene/jndarray:latest
+```
+
+The container runs [Demo.java](project/src/main/java/com/groupe8/ttykm/Demo.java) which exercises the full NDArray API and prints NumPy-style output.
 
 ## Feedback
 
