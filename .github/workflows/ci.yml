@@ -42,6 +42,7 @@ jobs:
             -Dsonar.projectKey=JNDArray \
             -Dsonar.projectName=JNDArray \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+            -Dsonar.exclusions=**/Demo.java \
             -Dsonar.qualitygate.wait=true
 
       - name: Upload Jacoco coverage report
