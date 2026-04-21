@@ -85,6 +85,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set lowercase image name
+        run: echo "IMAGE=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/jndarray" >> $GITHUB_ENV
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -98,5 +101,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/jndarray:latest
-            ghcr.io/${{ github.repository_owner }}/jndarray:1.0-snapshot
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:1.0-snapshot
