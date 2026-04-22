@@ -147,4 +147,20 @@ The container runs [Demo.java](project/src/main/java/com/groupe8/ttykm/Demo.java
 
 ## Feedback
 
-> _To be filled in at the end of the project._
+### What went well
+
+- The **feature branch workflow** with mandatory PR reviews kept the main branch stable throughout the project. No broken builds were ever merged.
+- **GitHub Actions** made CI/CD straightforward to set up and iterate on; the tight GitHub integration (branch protection rules, status checks, PR comments from Codecov and SonarQube) meant the pipeline was visible to both team members without any extra tooling.
+- **SonarQube** caught issues early (unused variables, missing Javadoc) that would otherwise have been noticed only at review time.
+- Splitting CI (`ci.yml`) from CD (`cd.yml`) made it immediately clear what runs on every PR vs. what runs only on merges, easier to debug and reason about.
+
+### What was difficult
+
+- Getting **Jacoco + SonarQube coverage** to agree required careful configuration: Jacoco generates the XML report, Sonar reads it, and both have their own thresholds. Excluding `Demo.java` from both tools had to be done independently.
+- The **GitHub Pages** job needed the source to be set to "GitHub Actions" in the repository settings, not obvious from the Actions documentation alone.
+- **Token management** (Packages token, Sonar token, Codecov token) across secrets required coordination between team members to avoid blocking each other's PRs.
+
+### What we would do differently
+
+- Add a `.devcontainer` so both contributors always build in the same environment.
+- Version releases properly (tag-based) instead of relying solely on `1.0-SNAPSHOT` for published artifacts.
